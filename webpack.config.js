@@ -10,13 +10,23 @@ module.exports = {
         //publicPath: '/'
     },
     devtool: "source-map",
+    eslint: {
+        configFile: '.eslintrc'
+    },
     plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-        template: './src/index.html'
-    })
-  ],
+        new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            template: './src/index.html'
+        })
+    ],
     module: {
+        preLoaders: [
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                loader: 'eslint-loader'
+            },
+        ],
         loaders: [
             {
                 test: /.jsx?$/,
